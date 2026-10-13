@@ -28,8 +28,8 @@ class SPN80:
         self.round_keys = spn_round_keys(master_key, rounds)
 
     @classmethod
-    def from_design(cls, design: object) -> "SPN80":
-        return cls(design.SBOX, design.SPN_PBOX, SPN_ROUNDS, design.MASTER_KEY)
+    def from_design(cls, design: object, rounds: int = -1) -> "SPN80":
+        return cls(design.SBOX, design.SPN_PBOX, SPN_ROUNDS if rounds < 0 else rounds, design.MASTER_KEY)
 
     def encrypt_block(self, plaintext: int) -> int:
         validate_block(plaintext, "mensagem")

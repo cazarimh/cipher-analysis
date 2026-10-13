@@ -29,8 +29,8 @@ class Feistel80:
         self.subkeys = feistel_subkeys(master_key, rounds)
 
     @classmethod
-    def from_design(cls, design: object) -> "Feistel80":
-        return cls(design.SBOX, design.FEISTEL_PBOX, FEISTEL_ROUNDS, design.MASTER_KEY)
+    def from_design(cls, design: object, rounds: int = -1) -> "Feistel80":
+        return cls(design.SBOX, design.FEISTEL_PBOX, FEISTEL_ROUNDS if rounds < 0 else rounds, design.MASTER_KEY)
 
     def round_function(self, half: int, subkey: int) -> int:
         """F: XOR com a subchave, substitui dez nibbles, permuta os 40 bits."""
